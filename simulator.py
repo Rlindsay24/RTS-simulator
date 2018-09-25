@@ -1,7 +1,7 @@
 # Implements a real-time system simulator based on a simplified model, widely used in industry.
 #
 # The simulator compares scheduling performance between a random scheduler
-# and Earliest Deadline First scheduling at when clock speed is variable.
+# and Earliest Deadline First scheduling when clock speed is variable.
 #
 # Results are saved to a local .csv file. To compare how many task sets one algorithm 'won', find the column titled EDFwins or RandWins.
 # Past example results can be found in the 'Results' subdirectory for different simulator configurations.
@@ -307,21 +307,19 @@ def winner(EDFcompleted, EDFmissedD, EDFpower, randCompleted, randMissedD, randP
             return [0,1,"Tie"]
 
 #constants
-scheduler = randomSchedule
 preemption = True
-nTicks = 10000
-nTasks = 5
-U = 0.75
-taskHeadroom = 0.75         # Turbo will kick in if task has 25% laxity of its deadline (for 0.75)
-minT = 20
-maxT = 100
-
-#uniform run
-minL = 1
-maxL = 1
-nLowLax = 0
-turboSpeed = 2
+nTicks = 10000				# Number of ticks a task set is simulated for
+nTasks = 5					# Number of tasks in set
 iterations = 100            # Handles # of iterations. If more than 100, use pypy implementation
+taskHeadroom = 0.75         # Turbo will kick in if task has 25% laxity of its deadline
+minT = 20					# Minimum task period
+maxT = 100					# Maximum task period
+minL = 1					# Minimum task laxity
+maxL = 1					# Maximum task laxity
+nLowLax = 0					# Number of tasks with a very low laxity
+turboSpeed = 2				# Speed of the processor when turbo is activated
+U = 0.75					# Utilization of the task set 0 <= U <= 1.
+
 
 #Run the simulator and save results to a local csv file
 for i in range(1):
